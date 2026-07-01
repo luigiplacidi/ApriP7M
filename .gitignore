@@ -1,0 +1,44 @@
+# --- ApriP7M test corpus (mai versionare documenti scaricati) ---
+test-corpus/public-downloads/
+test-corpus/report/
+
+# --- .NET / Visual Studio ---
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Bb]uild[Ll]og.*
+*.binlog
+
+# --- MSIX / packaging output ---
+artifacts/
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+*.appxupload
+AppPackages/
+BundleArtifacts/
+*.pfx
+*.cer
+
+# --- Rider ---
+.idea/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- NuGet ---
+*.nupkg
+packages/
+.nuget/

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="ApriP7M.App.Controls.SupportProjectCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            CornerRadius="8"
+            Padding="18">
+        <Grid ColumnSpacing="18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="48"
+                    Height="48"
+                    CornerRadius="8"
+                    Background="{ThemeResource AccentFillColorDefaultBrush}">
+                <FontIcon Glyph="&#xEB51;"
+                          FontSize="24"
+                          Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
+            </Border>
+
+            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                <TextBlock Text="Ti è stato utile?"
+                           Style="{StaticResource BodyStrongTextBlockStyle}" />
+                <TextBlock Text="Apri P7M è gratuito e nasce da ore rubate al tempo libero. Un caffè o una recensione aiutano il progetto a restare vivo, senza sbloccare funzioni aggiuntive."
+                           TextWrapping="Wrap"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        Spacing="8"
+                        VerticalAlignment="Center">
+                <Button Content="Offri un caffè"
+                        Style="{StaticResource AccentButtonStyle}"
+                        Click="Donate_Click" />
+                <Button Content="Recensione"
+                        Click="Review_Click" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

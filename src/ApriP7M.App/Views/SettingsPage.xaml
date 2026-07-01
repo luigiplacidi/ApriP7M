@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ApriP7M.App.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:ApriP7M.App.Controls"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer>
+        <StackPanel Padding="24" Spacing="16" MaxWidth="760" HorizontalAlignment="Left">
+            <TextBlock Text="Impostazioni" Style="{StaticResource TitleTextBlockStyle}" />
+
+            <!-- Tema -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Aspetto" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <ComboBox x:Name="ThemeCombo" Header="Tema" SelectionChanged="Theme_Changed">
+                        <ComboBoxItem Content="Predefinito di sistema" Tag="system" />
+                        <ComboBoxItem Content="Chiaro" Tag="light" />
+                        <ComboBoxItem Content="Scuro" Tag="dark" />
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+
+            <!-- Aggiornamenti -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Aggiornamenti" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <ToggleSwitch x:Name="StartupCheckToggle"
+                                  Header="Controlla aggiornamenti all'avvio"
+                                  OnContent="Sì" OffContent="No" />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Gli aggiornamenti vengono sempre gestiti dal Microsoft Store." />
+                </StackPanel>
+            </Border>
+
+            <!-- Associazioni file -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Apertura file" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Scegli quali estensioni aprire sempre con Apri P7M quando fai doppio clic da Esplora file." />
+                    <ToggleSwitch x:Name="P7mAssociationToggle"
+                                  Header="Apri sempre i file .p7m con Apri P7M"
+                                  OnContent="Attivo"
+                                  OffContent="Disattivato" />
+                    <ToggleSwitch x:Name="XmlAssociationToggle"
+                                  Header="Apri sempre i file .xml con Apri P7M"
+                                  OnContent="Attivo"
+                                  OffContent="Disattivato" />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Gli archivi .zip si possono aprire scegliendoli dall'app, ma non vengono associati: così Windows continua a gestirli normalmente." />
+                    <InfoBar x:Name="AssociationStatusBar"
+                             IsOpen="False"
+                             IsClosable="True"
+                             Severity="Informational" />
+                </StackPanel>
+            </Border>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Diagnostica anonima" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <ToggleSwitch x:Name="DiagnosticsToggle"
+                                  Header="Consenti diagnostica anonima manuale"
+                                  OnContent="Attiva"
+                                  OffContent="Disattivata" />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Disattivata di default. Nessun invio automatico: puoi vedere esattamente cosa verrebbe condiviso dopo un errore. Non vengono mai inclusi documenti, contenuti, nomi file completi o percorsi." />
+                </StackPanel>
+            </Border>
+
+            <controls:SupportProjectCard />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

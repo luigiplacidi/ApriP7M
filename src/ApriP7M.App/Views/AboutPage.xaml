@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ApriP7M.App.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:ApriP7M.App.Controls"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer>
+        <StackPanel Padding="24" Spacing="16" MaxWidth="760" HorizontalAlignment="Left">
+            <TextBlock Text="Informazioni" Style="{StaticResource TitleTextBlockStyle}" />
+
+            <StackPanel Orientation="Horizontal" Spacing="14">
+                <Image Source="ms-appx:///Assets/Square150x150Logo.png" Width="64" Height="64" />
+                <StackPanel VerticalAlignment="Center" Spacing="2">
+                    <TextBlock Text="Apri P7M" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock x:Name="VersionText"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Text="Apri, visualizza e converti. Tutto resta sul tuo PC."
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+            </StackPanel>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Crediti" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Realizzato da Luigi Placidi. Fatto con pazienza, caffè e qualche file .p7m di troppo." />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Apri P7M è pensato per persone normali: chi riceve file via PEC, fatture elettroniche o documenti firmati e vuole semplicemente leggerli." />
+                </StackPanel>
+            </Border>
+
+            <controls:SupportProjectCard />
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Contatti" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Per segnalazioni, problemi o suggerimenti puoi scrivere a:" />
+                    <HyperlinkButton Content="info@aprip7m.it"
+                                     NavigateUri="mailto:info@aprip7m.it" />
+                </StackPanel>
+            </Border>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Cosa non fa" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Apri P7M apre ed estrae il contenuto dei file. Non firma documenti, non verifica il valore legale della firma digitale e non sostituisce gli strumenti ufficiali di verifica." />
+                </StackPanel>
+            </Border>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Aggiornamenti" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Gli aggiornamenti sono gestiti dal Microsoft Store." />
+                    <Button x:Name="CheckUpdatesButton"
+                            Content="Controlla aggiornamenti"
+                            Click="CheckUpdates_Click" />
+                    <InfoBar x:Name="UpdateBar" IsOpen="False" Severity="Informational"
+                             Title="È disponibile una nuova versione di Apri P7M."
+                             IsClosable="True">
+                        <InfoBar.ActionButton>
+                            <Button Content="Aggiorna da Microsoft Store" Click="OpenStore_Click" />
+                        </InfoBar.ActionButton>
+                    </InfoBar>
+                </StackPanel>
+            </Border>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16">
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Codice sorgente" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <HyperlinkButton Content="Codice su GitHub" Click="OpenGitHub_Click" />
+                    <HyperlinkButton Content="Sito Apri P7M" NavigateUri="https://aprip7m.it" />
+                    <TextBlock TextWrapping="Wrap" Margin="0,8,0,0"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Creato per mia moglie. Condiviso con chiunque abbia litigato almeno una volta con un file .p7m." />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

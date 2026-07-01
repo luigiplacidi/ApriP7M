@@ -1,0 +1,41 @@
+Apri P7M Source Available License
+
+Copyright (c) 2026 Luigi Placidi
+
+This repository is made publicly available so that users can inspect how Apri P7M
+works, study the implementation, report issues, and propose improvements.
+
+Permission is granted to:
+
+- read, inspect, and study the source code;
+- clone or fork the repository for personal evaluation and development;
+- submit issues, suggestions, and pull requests to the original project;
+- build the software locally for personal testing.
+
+The following uses are not permitted without prior written permission from the
+copyright holder:
+
+- selling the software, modified builds, installers, packages, or derived
+  versions;
+- sublicensing or commercially redistributing the software;
+- publishing or distributing modified builds as Apri P7M or under a confusingly
+  similar name;
+- using the Apri P7M name, logo, icons, screenshots, or brand assets in another
+  product;
+- offering the software, modified versions, or derived services as a commercial
+  product or hosted service;
+- removing copyright, attribution, or license notices.
+
+Contributions submitted to this repository may be incorporated into Apri P7M.
+Unless agreed otherwise in writing, contributors grant the project owner a
+perpetual, worldwide, royalty-free right to use, modify, and distribute their
+contributions as part of Apri P7M.
+
+Third-party libraries and tools remain subject to their own licenses. See
+NOTICE.md for details.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT OF,
+OR IN CONNECTION WITH THE SOFTWARE OR THE USE OF THE SOFTWARE.

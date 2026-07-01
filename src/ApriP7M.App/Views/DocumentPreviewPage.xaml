@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ApriP7M.App.Views.DocumentPreviewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <x:Double x:Key="PreviewIconButtonSize">44</x:Double>
+    </Page.Resources>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState x:Name="WidePreviewLayout" />
+            <VisualState x:Name="NarrowPreviewLayout">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="0" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="FooterActionsColumn.Width" Value="0" />
+                    <Setter Target="FooterActionsRow.Height" Value="Auto" />
+                    <Setter Target="PreviewActions.(Grid.Row)" Value="1" />
+                    <Setter Target="PreviewActions.(Grid.Column)" Value="0" />
+                    <Setter Target="PreviewActions.Orientation" Value="Vertical" />
+                    <Setter Target="PreviewActions.HorizontalAlignment" Value="Stretch" />
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState x:Name="DefaultPreviewLayout">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="760" />
+                </VisualState.StateTriggers>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+
+    <Grid Padding="24" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Width="{StaticResource PreviewIconButtonSize}"
+                    Height="{StaticResource PreviewIconButtonSize}"
+                    Padding="0"
+                    Click="Close_Click"
+                    ToolTipService.ToolTip="Torna indietro"
+                    AutomationProperties.Name="Torna indietro">
+                <FontIcon Glyph="&#xE72B;" FontSize="16" />
+            </Button>
+
+            <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                <TextBlock x:Name="ResultTitle"
+                           FontSize="22"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap" />
+                <TextBlock x:Name="ResultSubtitle"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Button Grid.Column="2"
+                    Width="{StaticResource PreviewIconButtonSize}"
+                    Height="{StaticResource PreviewIconButtonSize}"
+                    Padding="0"
+                    Click="Close_Click"
+                    ToolTipService.ToolTip="Chiudi anteprima"
+                    AutomationProperties.Name="Chiudi anteprima">
+                <FontIcon Glyph="&#xE711;" FontSize="12" />
+            </Button>
+        </Grid>
+
+        <Border Grid.Row="1"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
+            <Grid>
+                <WebView2 x:Name="PdfPreview" Visibility="Collapsed" />
+                <TextBox x:Name="TextPreview"
+                         Visibility="Collapsed"
+                         IsReadOnly="True"
+                         AcceptsReturn="True"
+                         TextWrapping="NoWrap"
+                         FontFamily="Cascadia Mono, Consolas"
+                         BorderThickness="0" />
+                <StackPanel x:Name="NoPreview"
+                            Visibility="Collapsed"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            MaxWidth="460"
+                            Padding="24"
+                            Spacing="10">
+                    <FontIcon Glyph="&#xE8A5;"
+                              FontSize="44"
+                              Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                    <TextBlock Text="Anteprima non disponibile"
+                               HorizontalAlignment="Center"
+                               Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock Text="Il documento è stato estratto correttamente. Puoi salvarlo sul PC."
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2" ColumnSpacing="12" RowSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition x:Name="FooterActionsColumn" Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition x:Name="FooterActionsRow" Height="0" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="Anteprima locale: il documento resta sul tuo computer. Nessun upload, nessun cloud."
+                       VerticalAlignment="Center"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           TextWrapping="Wrap" />
+
+            <StackPanel x:Name="PreviewActions"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        Spacing="8">
+                <Button x:Name="SavePdfButton"
+                        Content="Salva PDF"
+                        Style="{StaticResource AccentButtonStyle}"
+                        Click="SavePdf_Click" />
+                <Button Content="Salva originale"
+                        Click="SaveOriginal_Click" />
+                <Button Content="Chiudi"
+                        Click="Close_Click" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
