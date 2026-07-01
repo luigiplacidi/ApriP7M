@@ -31,6 +31,9 @@
                                Text="Realizzato da Luigi Placidi. Fatto con pazienza, caffè e qualche file .p7m di troppo." />
                     <TextBlock TextWrapping="Wrap"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Fatto orgogliosamente in Italia 🇮🇹." />
+                    <TextBlock TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                Text="Apri P7M è pensato per persone normali: chi riceve file via PEC, fatture elettroniche o documenti firmati e vuole semplicemente leggerli." />
                 </StackPanel>
             </Border>
@@ -91,7 +94,7 @@
                     <HyperlinkButton Content="Sito Apri P7M" NavigateUri="https://aprip7m.it" />
                     <TextBlock TextWrapping="Wrap" Margin="0,8,0,0"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                               Text="Creato per mia moglie. Condiviso con chiunque abbia litigato almeno una volta con un file .p7m." />
+                               Text="Creato per mia moglie. Fatto orgogliosamente in Italia 🇮🇹. Condiviso con chiunque abbia litigato almeno una volta con un file .p7m." />
                 </StackPanel>
             </Border>
         </StackPanel>

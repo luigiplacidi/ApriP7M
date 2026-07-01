@@ -10,6 +10,8 @@
 
 <p align="center">
   App gratuita per Windows che apre, mostra e converte file <code>.p7m</code>, XML e fatture elettroniche in PDF leggibili — <strong>senza caricare nulla online</strong>.
+  <br>
+  <strong>Fatto orgogliosamente in Italia 🇮🇹</strong>
 </p>
 
 <p align="center">
@@ -150,4 +152,4 @@ pacchetti o di versioni derivate è vietata senza autorizzazione scritta. Vedi
 
 ---
 
-<p align="center"><em>Creato per mia moglie. Condiviso con chiunque abbia litigato almeno una volta con un file .p7m.</em></p>
+<p align="center"><em>Creato per mia moglie. Fatto orgogliosamente in Italia 🇮🇹. Condiviso con chiunque abbia litigato almeno una volta con un file .p7m.</em></p>
