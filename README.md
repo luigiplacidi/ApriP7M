@@ -41,6 +41,8 @@ pubblica: installazione più semplice, aggiornamenti gestiti da Windows e pacche
 firmato dallo Store.
 
 - **Sito ufficiale:** <https://aprip7m.it>
+- **Installer standalone (.exe):**
+  <https://github.com/luigiplacidi/ApriP7M/releases/latest/download/Apri.P7M.Setup.x64.exe>
 - **Tutte le release:** <https://github.com/luigiplacidi/ApriP7M/releases>
 - **Microsoft Store:** in attesa di pubblicazione
 
