@@ -10,8 +10,9 @@ const string PayloadResourceName = "ApriP7M-payload.zip";
 const string AppExeName = "ApriP7M.App.exe";
 const string AppDisplayName = "Apri P7M";
 const string AppPublisher = "Luigi Placidi";
-const string AppVersion = "1.0.0";
+const string AppVersion = "1.0.1";
 const string UninstallerExeName = "ApriP7M.Uninstall.exe";
+const string UninstallerDirectoryName = "Apri P7M Uninstaller";
 const string UninstallKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\LuigiPlacidi.ApriP7M";
 
 ApplicationConfiguration.Initialize();
@@ -114,8 +115,8 @@ static void Install(InstallOptions options)
 
         CreateShortcuts(appExe, options.CreateDesktopShortcut);
         RegisterFileAssociations(appExe, options.FileAssociations);
-        InstallUninstaller(installRoot);
-        RegisterUninstallEntry(installRoot);
+        var uninstallerPath = InstallUninstaller(programsRoot);
+        RegisterUninstallEntry(installRoot, uninstallerPath);
 
         if (options.LaunchAfterInstall)
         {
@@ -146,6 +147,7 @@ static void Uninstall(bool quiet)
     var programsRoot = Path.Combine(localAppData, "Programs");
     var installRoot = Path.Combine(programsRoot, AppDisplayName);
     var legacyInstallRoot = Path.Combine(programsRoot, "ApriP7M");
+    var uninstallerRoot = Path.Combine(programsRoot, UninstallerDirectoryName);
 
     StopAppProcesses(installRoot, legacyInstallRoot);
     DeleteShortcuts();
@@ -160,7 +162,15 @@ static void Uninstall(bool quiet)
 
     if (Directory.Exists(installRoot))
     {
-        ScheduleDirectoryRemoval(installRoot);
+        DeleteDirectoryWithRetry(installRoot);
+    }
+
+    var currentExe = Environment.ProcessPath;
+    if (!string.IsNullOrWhiteSpace(currentExe) &&
+        IsChildPath(uninstallerRoot, currentExe) &&
+        Directory.Exists(uninstallerRoot))
+    {
+        ScheduleDirectoryRemoval(uninstallerRoot);
     }
 
     if (!quiet)
@@ -400,24 +410,28 @@ static void UnregisterAssociation(AssociationDefinition association)
     Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\" + association.ProgId, throwOnMissingSubKey: false);
 }
 
-static void InstallUninstaller(string installRoot)
+static string InstallUninstaller(string programsRoot)
 {
     var currentExe = Environment.ProcessPath;
     if (string.IsNullOrWhiteSpace(currentExe) || !File.Exists(currentExe))
     {
-        return;
+        throw new InvalidOperationException("Impossibile preparare l'uninstaller.");
     }
 
-    var uninstallerPath = Path.Combine(installRoot, UninstallerExeName);
+    var uninstallerRoot = Path.Combine(programsRoot, UninstallerDirectoryName);
+    Directory.CreateDirectory(uninstallerRoot);
+
+    var uninstallerPath = Path.Combine(uninstallerRoot, UninstallerExeName);
     if (!string.Equals(currentExe, uninstallerPath, StringComparison.OrdinalIgnoreCase))
     {
         File.Copy(currentExe, uninstallerPath, overwrite: true);
     }
+
+    return uninstallerPath;
 }
 
-static void RegisterUninstallEntry(string installRoot)
+static void RegisterUninstallEntry(string installRoot, string uninstallerPath)
 {
-    var uninstallerPath = Path.Combine(installRoot, UninstallerExeName);
     var appExe = Path.Combine(installRoot, AppExeName);
     using var key = Registry.CurrentUser.CreateSubKey(UninstallKeyPath)
         ?? throw new InvalidOperationException("Impossibile registrare la disinstallazione.");
@@ -446,6 +460,13 @@ static void ScheduleDirectoryRemoval(string installRoot)
         UseShellExecute = false,
         WindowStyle = ProcessWindowStyle.Hidden
     });
+}
+
+static bool IsChildPath(string parent, string child)
+{
+    var parentFull = Path.GetFullPath(parent).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
+    var childFull = Path.GetFullPath(child);
+    return childFull.StartsWith(parentFull, StringComparison.OrdinalIgnoreCase);
 }
 
 static void AssertSafeInstallPath(string installRoot)

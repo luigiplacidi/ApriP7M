@@ -113,7 +113,7 @@ public sealed partial class HomeViewModel : ObservableObject
             var kind = FileTypeDetector.Detect(filePath);
             var size = File.Exists(filePath) ? new FileInfo(filePath).Length : -1;
             var builder = new DiagnosticBuilder(
-                "1.0.0",
+                "1.0.1",
                 Environment.OSVersion.VersionString,
                 CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
 

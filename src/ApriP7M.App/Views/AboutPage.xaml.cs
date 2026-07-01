@@ -26,7 +26,7 @@ public sealed partial class AboutPage : Page
         }
         catch
         {
-            return "1.0.0";
+            return "1.0.1";
         }
     }
 
