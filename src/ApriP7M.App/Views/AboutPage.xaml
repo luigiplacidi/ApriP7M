@@ -29,9 +29,19 @@
                     <TextBlock TextWrapping="Wrap"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                Text="Realizzato da Luigi Placidi. Fatto con pazienza, caffè e qualche file .p7m di troppo." />
-                    <TextBlock TextWrapping="Wrap"
-                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                               Text="Fatto orgogliosamente in Italia 🇮🇹." />
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   Text="Fatto orgogliosamente in Italia" />
+                        <Border VerticalAlignment="Center"
+                                BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                                BorderThickness="1" CornerRadius="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="6" Height="12" Fill="#009246" />
+                                <Rectangle Width="6" Height="12" Fill="#F4F5F0" />
+                                <Rectangle Width="6" Height="12" Fill="#CE2B37" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
                     <TextBlock TextWrapping="Wrap"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                Text="Apri P7M è pensato per persone normali: chi riceve file via PEC, fatture elettroniche o documenti firmati e vuole semplicemente leggerli." />
@@ -94,7 +104,7 @@
                     <HyperlinkButton Content="Sito Apri P7M" NavigateUri="https://aprip7m.it" />
                     <TextBlock TextWrapping="Wrap" Margin="0,8,0,0"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                               Text="Creato per mia moglie. Fatto orgogliosamente in Italia 🇮🇹. Condiviso con chiunque abbia litigato almeno una volta con un file .p7m." />
+                               Text="Creato per mia moglie. Fatto orgogliosamente in Italia. Condiviso con chiunque abbia litigato almeno una volta con un file .p7m." />
                 </StackPanel>
             </Border>
         </StackPanel>

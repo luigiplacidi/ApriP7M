@@ -36,7 +36,33 @@ public sealed partial class AboutPage : Page
         try
         {
             var result = await _store.CheckForUpdatesAsync();
-            UpdateBar.IsOpen = result.UpdateAvailable;
+
+            if (result.UpdateAvailable)
+            {
+                UpdateBar.Title = "È disponibile una nuova versione di Apri P7M.";
+                UpdateBar.Severity = InfoBarSeverity.Informational;
+            }
+            else if (result.CheckSucceeded)
+            {
+                UpdateBar.Title = "Nessun aggiornamento: hai già l'ultima versione.";
+                UpdateBar.Severity = InfoBarSeverity.Success;
+            }
+            else
+            {
+                UpdateBar.Title = "Il controllo automatico funziona solo con la versione Microsoft Store. " +
+                    "Con l'installer, scarica le nuove versioni da aprip7m.it/download.";
+                UpdateBar.Severity = InfoBarSeverity.Informational;
+            }
+
+            // Il pulsante "Aggiorna da Microsoft Store" non serve quando sei già aggiornato.
+            if (UpdateBar.ActionButton is Button action)
+            {
+                action.Visibility = !result.UpdateAvailable && result.CheckSucceeded
+                    ? Visibility.Collapsed
+                    : Visibility.Visible;
+            }
+
+            UpdateBar.IsOpen = true;
         }
         finally
         {

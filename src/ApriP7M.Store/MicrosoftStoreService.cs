@@ -34,7 +34,7 @@ public sealed class MicrosoftStoreService : IStoreService
         {
             // Fuori dal pacchetto Store il controllo non è disponibile:
             // gli aggiornamenti passano dal sito ufficiale.
-            return new UpdateCheckResult(false, null);
+            return new UpdateCheckResult(false, null, CheckSucceeded: false);
         }
 #else
         await Task.CompletedTask;

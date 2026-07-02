@@ -1,7 +1,11 @@
 namespace ApriP7M.Store;
 
-/// <summary>Esito di un controllo aggiornamenti sul Microsoft Store.</summary>
-public sealed record UpdateCheckResult(bool UpdateAvailable, string? LatestVersion);
+/// <summary>
+/// Esito di un controllo aggiornamenti sul Microsoft Store.
+/// <see cref="CheckSucceeded"/> è falso quando il controllo non è possibile,
+/// ad esempio con l'installazione standalone fuori dallo Store.
+/// </summary>
+public sealed record UpdateCheckResult(bool UpdateAvailable, string? LatestVersion, bool CheckSucceeded = true);
 
 /// <summary>
 /// Astrae l'integrazione con il Microsoft Store, così da poterla simulare in
