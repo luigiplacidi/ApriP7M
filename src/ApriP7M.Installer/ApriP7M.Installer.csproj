@@ -11,6 +11,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>ApriP7M-Setup-x64</AssemblyName>
     <ApplicationIcon>..\ApriP7M.App\Assets\ApriP7M.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
