@@ -15,11 +15,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Microsoft%20Store-in%20arrivo-blue?logo=microsoft" alt="Microsoft Store in arrivo">
+  <a href="https://apps.microsoft.com/store/detail/9PN10B89Z7LR"><img src="https://img.shields.io/badge/Microsoft%20Store-disponibile-blue?logo=microsoft" alt="Disponibile sul Microsoft Store"></a>
   <a href="https://aprip7m.it"><img src="https://img.shields.io/badge/sito-aprip7m.it-2563eb" alt="Sito Apri P7M"></a>
   <img src="https://img.shields.io/badge/licenza-source%20available-green" alt="Source available">
   <img src="https://img.shields.io/badge/.NET-10%20LTS-512BD4?logo=dotnet" alt=".NET 10">
-  <img src="https://img.shields.io/badge/Windows-11-0078D6?logo=windows" alt="Windows 11">
+  <img src="https://img.shields.io/badge/Windows-10%20%2F%2011-0078D6?logo=windows" alt="Windows 10 e 11">
 </p>
 
 ---
@@ -38,15 +38,14 @@ registrazione.
 
 ## Download
 
-La versione consigliata sarà quella del **Microsoft Store** appena la scheda sarà
-pubblica: installazione più semplice, aggiornamenti gestiti da Windows e pacchetto
-firmato dallo Store.
+La versione consigliata è quella del **Microsoft Store**: installazione più
+semplice, aggiornamenti gestiti da Windows e pacchetto firmato dallo Store.
 
+- **Microsoft Store:** <https://apps.microsoft.com/store/detail/9PN10B89Z7LR>
 - **Sito ufficiale:** <https://aprip7m.it>
 - **Installer standalone (.exe):**
   <https://github.com/luigiplacidi/ApriP7M/releases/latest/download/Apri.P7M.Setup.x64.exe>
 - **Tutte le release:** <https://github.com/luigiplacidi/ApriP7M/releases>
-- **Microsoft Store:** in attesa di pubblicazione
 
 L'installer standalone è una procedura guidata Windows: permette di scegliere la
 cartella di installazione, creare il collegamento sul desktop, associare le
@@ -76,7 +75,7 @@ carica automaticamente gli artefatti ufficiali nella pagina release del progetto
 Apri P7M **non** firma documenti, **non** verifica la validità legale della firma,
 **non** sostituisce i software ufficiali di verifica, **non** invia PEC, **non**
 gestisce la conservazione sostitutiva, **non** usa il cloud, **non** richiede login,
-**non** ha telemetria continua, **non** installa servizi in background e **non** parte
+**non** ha telemetria automatica, **non** installa servizi in background e **non** parte
 con Windows.
 
 Apri P7M apre ed estrae. Per la verifica legale della firma, usa gli strumenti
@@ -87,7 +86,7 @@ ufficiali.
 La privacy è il cuore del progetto:
 
 - ❌ Nessun upload dei file
-- ❌ Nessuna telemetria nella v1
+- ❌ Nessuna telemetria automatica
 - ❌ Nessun tracciamento dei documenti
 - ✅ Funzionamento offline
 - ✅ File temporanei gestiti e ripuliti
@@ -132,7 +131,7 @@ dotnet test tests/ApriP7M.Core.Tests
 
 ## Aggiornamenti
 
-Quando la versione **Microsoft Store** sarà pubblica, gli aggiornamenti passeranno
+Se installi dal **Microsoft Store**, gli aggiornamenti arrivano automaticamente
 dal canale normale di Windows. Se usi l'installer standalone, scarica le nuove
 versioni solo dal sito ufficiale o dalle release GitHub del progetto.
 

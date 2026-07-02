@@ -12,7 +12,7 @@ fuori dal tuo computer.
 - **Funzionamento offline.** L'app non richiede connessione internet per le sue
   funzioni principali.
 - **Nessuna registrazione.** Nessun account, nessun login.
-- **Nessuna telemetria nella v1.** Nessun tracciamento automatico dell'uso.
+- **Nessuna telemetria automatica.** Nessun tracciamento automatico dell'uso.
 - **Nessun servizio in background.** L'app non si avvia con Windows e non installa
   servizi.
 - **Nessun privilegio amministrativo** richiesto, salvo dove strettamente necessario.
