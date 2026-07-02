@@ -17,7 +17,7 @@ Aree sensibili:
 
 **Non aprire una issue pubblica** per vulnerabilità di sicurezza.
 
-Scrivi in privato a: **security@aprip7m.it** (o usa "Private vulnerability reporting"
+Scrivi in privato a: **info@aprip7m.it** (o usa "Private vulnerability reporting"
 di GitHub, se attivo).
 
 Includi:
