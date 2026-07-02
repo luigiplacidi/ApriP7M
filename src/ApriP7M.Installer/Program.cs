@@ -496,10 +496,25 @@ static void AssertSafeInstallPath(string installRoot)
 
     if (Directory.Exists(fullPath) &&
         Directory.EnumerateFileSystemEntries(fullPath).Any() &&
-        !File.Exists(Path.Combine(fullPath, AppExeName)))
+        !File.Exists(Path.Combine(fullPath, AppExeName)) &&
+        !IsOwnInstallRoot(fullPath))
     {
-        throw new InvalidOperationException("La cartella scelta contiene altri file. Scegli una cartella vuota o una cartella dove Apri P7M è già installato.");
+        throw new InvalidOperationException("La cartella scelta contiene altri file. Scegli una cartella vuota oppure la cartella dove Apri P7M è già installato: in quel caso l'installazione aggiorna la versione esistente.");
     }
+}
+
+// Le cartelle di installazione predefinite sono territorio dell'app: anche se
+// contengono residui di una versione precedente (senza l'eseguibile), la
+// reinstallazione deve poterle aggiornare senza bloccarsi.
+static bool IsOwnInstallRoot(string fullPath)
+{
+    var programsRoot = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs");
+    var normalized = fullPath.TrimEnd(Path.DirectorySeparatorChar);
+
+    return new[] { AppDisplayName, "ApriP7M" }
+        .Select(name => Path.GetFullPath(Path.Combine(programsRoot, name)).TrimEnd(Path.DirectorySeparatorChar))
+        .Any(candidate => string.Equals(candidate, normalized, StringComparison.OrdinalIgnoreCase));
 }
 
 static bool IsAdministrator()
@@ -823,8 +838,24 @@ sealed class InstallerWizard : Form
 
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                pathBox.Text = dialog.SelectedPath;
-                Options.InstallRoot = dialog.SelectedPath;
+                var selected = dialog.SelectedPath;
+
+                // Convenzione dei setup Windows: se la cartella scelta non è
+                // vuota e non contiene già Apri P7M, proponiamo una
+                // sottocartella dedicata invece di rifiutarla dopo.
+                if (Directory.Exists(selected) &&
+                    Directory.EnumerateFileSystemEntries(selected).Any() &&
+                    !File.Exists(Path.Combine(selected, "ApriP7M.App.exe")) &&
+                    !string.Equals(
+                        Path.GetFileName(Path.TrimEndingDirectorySeparator(selected)),
+                        "Apri P7M",
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    selected = Path.Combine(selected, "Apri P7M");
+                }
+
+                pathBox.Text = selected;
+                Options.InstallRoot = selected;
             }
         };
         pathBox.TextChanged += (_, _) => Options.InstallRoot = pathBox.Text;
