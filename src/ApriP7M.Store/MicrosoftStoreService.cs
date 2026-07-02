@@ -15,15 +15,27 @@ public sealed class MicrosoftStoreService : IStoreService
     private const string ProductId = "9PN10B89Z7LR";
 
 #if WINDOWS
-    private readonly StoreContext _context = StoreContext.GetDefault();
+    // Lazy: StoreContext.GetDefault() può lanciare se l'app non è installata
+    // dal pacchetto Store (installer standalone). Non deve rompere il costruttore.
+    private StoreContext? _context;
+    private StoreContext Context => _context ??= StoreContext.GetDefault();
 #endif
 
     public async Task<UpdateCheckResult> CheckForUpdatesAsync(CancellationToken ct = default)
     {
 #if WINDOWS
-        var updates = await _context.GetAppAndOptionalStorePackageUpdatesAsync().AsTask(ct);
-        var available = updates.Count > 0;
-        return new UpdateCheckResult(available, available ? "disponibile" : null);
+        try
+        {
+            var updates = await Context.GetAppAndOptionalStorePackageUpdatesAsync().AsTask(ct);
+            var available = updates.Count > 0;
+            return new UpdateCheckResult(available, available ? "disponibile" : null);
+        }
+        catch (Exception)
+        {
+            // Fuori dal pacchetto Store il controllo non è disponibile:
+            // gli aggiornamenti passano dal sito ufficiale.
+            return new UpdateCheckResult(false, null);
+        }
 #else
         await Task.CompletedTask;
         return new UpdateCheckResult(false, null);
@@ -43,7 +55,12 @@ public sealed class MicrosoftStoreService : IStoreService
     public async Task RequestReviewAsync()
     {
 #if WINDOWS
-        await _context.RequestRateAndReviewAppAsync();
+        // Deep link alla finestra di recensione dello Store. Non usiamo
+        // RequestRateAndReviewAppAsync: in WinUI 3 desktop richiede un hwnd
+        // (InitializeWithWindow) e fuori dal pacchetto Store fallisce in
+        // silenzio. Il deep link funziona sia per l'installazione Store sia
+        // per l'installer standalone.
+        await Launcher.LaunchUriAsync(new Uri($"ms-windows-store://review/?ProductId={ProductId}"));
 #else
         await Task.CompletedTask;
 #endif

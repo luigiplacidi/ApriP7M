@@ -15,8 +15,26 @@ public sealed partial class SupportProjectCard : UserControl
     }
 
     private async void Donate_Click(object sender, RoutedEventArgs e)
-        => await Launcher.LaunchUriAsync(new Uri("https://www.paypal.com/donate/?hosted_button_id=7ZTNNLPSGE2BU"));
+    {
+        try
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://www.paypal.com/donate/?hosted_button_id=7ZTNNLPSGE2BU"));
+        }
+        catch
+        {
+            // Un link che non si apre non deve far cadere l'app.
+        }
+    }
 
     private async void Review_Click(object sender, RoutedEventArgs e)
-        => await _store.RequestReviewAsync();
+    {
+        try
+        {
+            await _store.RequestReviewAsync();
+        }
+        catch
+        {
+            // Un link che non si apre non deve far cadere l'app.
+        }
+    }
 }

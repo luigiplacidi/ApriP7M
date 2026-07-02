@@ -45,8 +45,26 @@ public sealed partial class AboutPage : Page
     }
 
     private async void OpenStore_Click(object sender, RoutedEventArgs e)
-        => await _store.OpenStorePageForUpdateAsync();
+    {
+        try
+        {
+            await _store.OpenStorePageForUpdateAsync();
+        }
+        catch
+        {
+            // Un link che non si apre non deve far cadere l'app.
+        }
+    }
 
     private async void OpenGitHub_Click(object sender, RoutedEventArgs e)
-        => await Launcher.LaunchUriAsync(new Uri("https://github.com/luigiplacidi/ApriP7M"));
+    {
+        try
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/luigiplacidi/ApriP7M"));
+        }
+        catch
+        {
+            // Un link che non si apre non deve far cadere l'app.
+        }
+    }
 }
