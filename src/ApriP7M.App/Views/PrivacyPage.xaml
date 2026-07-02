@@ -20,7 +20,7 @@
                 <StackPanel Spacing="8">
                     <TextBlock Text="Cosa NON facciamo" Style="{StaticResource BodyStrongTextBlockStyle}" />
                     <TextBlock TextWrapping="Wrap" Text="• Nessun upload dei file" />
-                    <TextBlock TextWrapping="Wrap" Text="• Nessuna telemetria nella v1" />
+                    <TextBlock TextWrapping="Wrap" Text="• Nessuna telemetria automatica" />
                     <TextBlock TextWrapping="Wrap" Text="• Nessun tracciamento dei documenti" />
                     <TextBlock TextWrapping="Wrap" Text="• Nessun login, nessun account" />
                     <TextBlock TextWrapping="Wrap" Text="• Nessun servizio in background, nessun avvio con Windows" />
