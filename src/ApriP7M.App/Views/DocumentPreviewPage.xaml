@@ -124,7 +124,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0"
-                       Text="Anteprima locale: il documento resta sul tuo computer. Nessun upload, nessun cloud."
+                       Text="Anteprima sul tuo computer: il documento non viene caricato da nessuna parte."
                        VerticalAlignment="Center"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                            TextWrapping="Wrap" />

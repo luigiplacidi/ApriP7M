@@ -196,7 +196,7 @@ public sealed partial class HomePage : Page
             {
                 XamlRoot = XamlRoot,
                 Title = "Diagnostica anonima disattivata",
-                Content = "La diagnostica è facoltativa e disattivata di default. Puoi abilitarla da Impostazioni: nessun documento, contenuto, nome file completo o percorso viene condiviso.",
+                Content = "La diagnostica è facoltativa ed è spenta finché non la attivi tu da Impostazioni. Non vengono mai condivisi documenti, contenuti, nomi di file o cartelle.",
                 PrimaryButtonText = "Apri Impostazioni",
                 CloseButtonText = "Chiudi"
             };

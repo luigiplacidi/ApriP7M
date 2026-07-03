@@ -12,14 +12,14 @@
 
             <InfoBar IsOpen="True" IsClosable="False" Severity="Success"
                      Title="I tuoi documenti restano sul tuo PC"
-                     Message="Apri P7M non carica nulla online. Tutta l'elaborazione avviene in locale, offline." />
+                     Message="Apri P7M non carica nulla online: tutto avviene sul tuo computer, anche senza internet." />
 
             <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1" CornerRadius="8" Padding="16">
                 <StackPanel Spacing="8">
                     <TextBlock Text="Cosa NON facciamo" Style="{StaticResource BodyStrongTextBlockStyle}" />
-                    <TextBlock TextWrapping="Wrap" Text="• Nessun upload dei file" />
+                    <TextBlock TextWrapping="Wrap" Text="• Nessun file viene caricato online" />
                     <TextBlock TextWrapping="Wrap" Text="• Nessuna telemetria automatica" />
                     <TextBlock TextWrapping="Wrap" Text="• Nessun tracciamento dei documenti" />
                     <TextBlock TextWrapping="Wrap" Text="• Nessun login, nessun account" />
@@ -32,9 +32,9 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1" CornerRadius="8" Padding="16">
                 <StackPanel Spacing="8">
-                    <TextBlock Text="File temporanei e log" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock Text="File temporanei e note tecniche" Style="{StaticResource BodyStrongTextBlockStyle}" />
                     <TextBlock TextWrapping="Wrap"
-                               Text="I file temporanei restano sul tuo PC e vengono ripuliti al termine. I log locali sono minimizzati e non contengono mai il contenuto dei documenti, i nomi file completi o i percorsi." />
+                               Text="I file temporanei restano sul tuo PC e vengono eliminati al termine. Le note tecniche (i cosiddetti log) sono ridotte al minimo e non contengono mai il contenuto dei documenti, i nomi dei file o le cartelle." />
                 </StackPanel>
             </Border>
 

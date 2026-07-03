@@ -387,7 +387,7 @@
             <StackPanel Orientation="Horizontal" Spacing="8">
                 <FontIcon Glyph="&#xE72E;"
                           Foreground="{ThemeResource PrivacyBandForegroundBrush}" />
-                <TextBlock Text="I tuoi documenti restano sempre sul tuo PC. Nessun upload. Nessuna raccolta dati."
+                <TextBlock Text="I tuoi documenti restano sempre sul tuo PC: non ne carichiamo nessuno online e non raccogliamo dati."
                            Foreground="{ThemeResource PrivacyBandForegroundBrush}"
                            TextWrapping="Wrap" />
             </StackPanel>

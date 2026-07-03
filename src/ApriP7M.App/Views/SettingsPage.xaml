@@ -77,7 +77,7 @@
                                   OffContent="Disattivata" />
                     <TextBlock TextWrapping="Wrap"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                               Text="Disattivata di default. Nessun invio automatico: puoi vedere esattamente cosa verrebbe condiviso dopo un errore. Non vengono mai inclusi documenti, contenuti, nomi file completi o percorsi." />
+                               Text="Spenta finché non la attivi tu. Nessun invio automatico: dopo un errore puoi vedere esattamente cosa verrebbe condiviso, e non ci sono mai documenti, contenuti, nomi di file o cartelle." />
                 </StackPanel>
             </Border>
 
