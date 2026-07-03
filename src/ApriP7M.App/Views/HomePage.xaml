@@ -157,7 +157,7 @@
                             <TextBlock Text="Cronologia"
                                        HorizontalAlignment="Center"
                                        Style="{StaticResource BodyStrongTextBlockStyle}" />
-                            <TextBlock Text="Riapri i risultati di questa sessione"
+                            <TextBlock Text="Riapri i documenti aperti da quando hai avviato l'app"
                                        TextAlignment="Center"
                                        TextWrapping="Wrap"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
@@ -331,7 +331,7 @@
                              IsClosable="False"
                              Severity="Informational"
                              Title="Nessun documento recente"
-                             Message="La cronologia resta solo in questa sessione e non salva percorsi o nomi file su disco." />
+                             Message="La cronologia vive solo finché l'app è aperta: quando la chiudi si svuota da sola. Non salviamo su disco né i nomi dei file né le cartelle." />
                     <ItemsControl x:Name="HistoryList"
                                   ItemsSource="{x:Bind ViewModel.RecentResults, Mode=OneWay}">
                         <ItemsControl.ItemTemplate>

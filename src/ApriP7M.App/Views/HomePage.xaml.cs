@@ -132,7 +132,7 @@ public sealed partial class HomePage : Page
         {
             XamlRoot = XamlRoot,
             Title = "Pulire la cronologia?",
-            Content = "Verranno rimossi solo i risultati di questa sessione. I file sul PC non vengono modificati.",
+            Content = "Verrà svuotato solo questo elenco. I tuoi documenti sul PC non vengono toccati.",
             PrimaryButtonText = "Pulisci",
             CloseButtonText = "Annulla",
             DefaultButton = ContentDialogButton.Close
@@ -271,7 +271,7 @@ public sealed partial class HomePage : Page
         {
             PageMode.Open => "Apri la busta firmata e leggi il documento contenuto dentro, senza caricarlo online.",
             PageMode.Convert => "Leggi una fattura elettronica XML in un PDF di cortesia, comodo da controllare e stampare.",
-            PageMode.History => "Ritrova i risultati aperti in questa sessione. Non salviamo percorsi o nomi file su disco.",
+            PageMode.History => "Qui ritrovi i documenti aperti da quando hai avviato l'app. Alla chiusura la cronologia si svuota da sola: niente resta salvato su disco.",
             _ => "Una piccola app gratuita per Windows per leggere P7M, XML e fatture elettroniche direttamente dal tuo PC."
         };
 
