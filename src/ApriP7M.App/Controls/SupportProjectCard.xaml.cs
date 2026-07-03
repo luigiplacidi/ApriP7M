@@ -18,7 +18,7 @@ public sealed partial class SupportProjectCard : UserControl
     {
         try
         {
-            await Launcher.LaunchUriAsync(new Uri("https://www.paypal.com/donate/?hosted_button_id=7ZTNNLPSGE2BU"));
+            await Launcher.LaunchUriAsync(new Uri("https://www.paypal.com/donate/?hosted_button_id=7ZTNNLPSGE2BU&locale.x=it_IT"));
         }
         catch
         {
