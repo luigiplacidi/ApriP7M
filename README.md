@@ -17,6 +17,12 @@
 <p align="center">
   <a href="https://apps.microsoft.com/store/detail/9PN10B89Z7LR"><img src="https://img.shields.io/badge/Microsoft%20Store-disponibile-blue?logo=microsoft" alt="Disponibile sul Microsoft Store"></a>
   <a href="https://aprip7m.it"><img src="https://img.shields.io/badge/sito-aprip7m.it-2563eb" alt="Sito Apri P7M"></a>
+  <a href="https://github.com/luigiplacidi/ApriP7M/releases/latest"><img src="https://img.shields.io/github/v/release/luigiplacidi/ApriP7M?label=release&color=0f9d58" alt="Ultima release"></a>
+  <img src="https://img.shields.io/github/downloads/luigiplacidi/ApriP7M/total?label=download&color=555" alt="Download totali">
+</p>
+
+<p align="center">
+  <a href="https://github.com/luigiplacidi/ApriP7M/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/luigiplacidi/ApriP7M/build.yml?branch=main&label=build" alt="Stato build"></a>
   <img src="https://img.shields.io/badge/licenza-source%20available-green" alt="Source available">
   <img src="https://img.shields.io/badge/.NET-10%20LTS-512BD4?logo=dotnet" alt=".NET 10">
   <img src="https://img.shields.io/badge/Windows-10%20%2F%2011-0078D6?logo=windows" alt="Windows 10 e 11">
@@ -35,6 +41,10 @@ documento originale e lo rende leggibile**. Tutto in locale, offline, senza
 registrazione.
 
 > **I tuoi file restano sul tuo computer. Apri P7M non carica nulla online.**
+
+<p align="center">
+  <img src="assets/app-home.png" alt="Schermata principale di Apri P7M: area per trascinare un file .p7m, .xml o .zip e azioni principali" width="760">
+</p>
 
 ## Download
 
@@ -129,11 +139,19 @@ dotnet build -c Release
 dotnet test tests/ApriP7M.Core.Tests
 ```
 
+I test includono le **verifiche delle promesse di prodotto**
+([`ProductPromisesTests`](tests/ApriP7M.Core.Tests/ProductPromisesTests.cs)):
+nessuna API di rete nella logica, estrazione P7M fedele byte per byte, PDF di
+cortesia con l'avviso sul valore fiscale, pulizia dei file temporanei,
+diagnostica disattivata di default. Chiunque può eseguirli e controllare.
+
 ## Aggiornamenti
 
 Se installi dal **Microsoft Store**, gli aggiornamenti arrivano automaticamente
 dal canale normale di Windows. Se usi l'installer standalone, scarica le nuove
 versioni solo dal sito ufficiale o dalle release GitHub del progetto.
+
+Le novità di ogni versione sono nel [CHANGELOG](CHANGELOG.md).
 
 ## Contribuire
 
