@@ -63,9 +63,6 @@ estensioni `.p7m` e `.xml`, e avviare l'app al termine. Gli archivi `.zip`
 restano apribili dall'app, ma non vengono associati per non sostituire il gestore
 ZIP di Windows.
 
-Quando viene pubblicato un nuovo tag `v*`, la pipeline GitHub Release genera e
-carica automaticamente gli artefatti ufficiali nella pagina release del progetto.
-
 ## Cosa fa
 
 - 📂 Apre file `.p7m`, `.pdf.p7m`, `.xml.p7m`, `.xml` e `.zip`
