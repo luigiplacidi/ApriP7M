@@ -3,6 +3,14 @@
 Le novità di ogni versione di Apri P7M. Le release complete, con installer e
 pacchetti, sono nella [pagina release](https://github.com/luigiplacidi/ApriP7M/releases).
 
+## 1.0.5 — 3 luglio 2026
+
+- La pagina PayPal per le donazioni si apre in italiano
+- La Cronologia si spiega da sola: vive finché l'app è aperta, si svuota alla
+  chiusura, niente resta salvato su disco
+- Testi senza gergo tecnico in tutta l'app: via "upload", "cloud", "log",
+  "default" — ora dicono cosa succede in parole semplici
+
 ## 1.0.4 — 2 luglio 2026
 
 - La reinstallazione sopra una versione esistente ora aggiorna senza bloccarsi,
