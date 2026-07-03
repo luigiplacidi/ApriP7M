@@ -7,8 +7,8 @@ fuori dal tuo computer.
 
 ## Principi
 
-- **Nessun upload.** Nessun file (P7M, PDF, XML, ZIP, allegati) viene mai inviato
-  online. Tutta l'elaborazione avviene in locale.
+- **Niente caricato online.** Nessun file (P7M, PDF, XML, ZIP, allegati) viene mai inviato
+  online. Tutto avviene sul PC dell'utente.
 - **Funzionamento offline.** L'app non richiede connessione internet per le sue
   funzioni principali.
 - **Nessuna registrazione.** Nessun account, nessun login.
@@ -28,11 +28,11 @@ documento estratto da un `.p7m`). Questi file:
 
 ## Log locali
 
-L'app può scrivere log diagnostici **locali e minimizzati** per facilitare la
-risoluzione dei problemi. I log:
+L'app può scrivere note tecniche (log) **locali e ridotte al minimo** per facilitare la
+risoluzione dei problemi. Queste note:
 
 - **non contengono mai** il contenuto dei documenti;
-- **non contengono** nomi file completi né percorsi locali;
+- **non contengono** i nomi dei file né le cartelle;
 - registrano solo informazioni tecniche (codice errore, modulo, fase).
 
 ## Diagnostica anonima (opt-in)
@@ -41,7 +41,7 @@ Apri P7M offre una funzione opzionale e volontaria di diagnostica anonima.
 
 Regole:
 
-- **Disattivata di default.**
+- **Spenta finché non la attivi tu.**
 - Nessuna telemetria continua, nessun invio automatico.
 - La diagnostica è generata solo dopo un errore e solo dopo una tua azione esplicita.
 - Prima della condivisione, l'app mostra esattamente cosa verrebbe condiviso.
@@ -57,7 +57,7 @@ Regole:
 
 ### Cosa può essere incluso
 
-Solo metadati tecnici minimizzati:
+Solo poche informazioni tecniche essenziali:
 
 - Versione dell'app
 - Versione di Windows

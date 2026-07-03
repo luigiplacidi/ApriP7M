@@ -37,7 +37,7 @@ dover installare software complicati, legarsi a un provider di firma digitale o 
 peggio — caricare documenti sensibili su siti online.
 
 Apri P7M fa una cosa sola, e la fa bene: **apre il contenitore firmato, estrae il
-documento originale e lo rende leggibile**. Tutto in locale, offline, senza
+documento originale e lo rende leggibile**. Tutto sul tuo PC, anche senza internet, senza
 registrazione.
 
 > **I tuoi file restano sul tuo computer. Apri P7M non carica nulla online.**
@@ -81,7 +81,7 @@ ZIP di Windows.
 
 Apri P7M **non** firma documenti, **non** verifica la validità legale della firma,
 **non** sostituisce i software ufficiali di verifica, **non** invia PEC, **non**
-gestisce la conservazione sostitutiva, **non** usa il cloud, **non** richiede login,
+gestisce la conservazione sostitutiva, **non** usa servizi online, **non** richiede login,
 **non** ha telemetria automatica, **non** installa servizi in background e **non** parte
 con Windows.
 
@@ -92,14 +92,14 @@ ufficiali.
 
 La privacy è il cuore del progetto:
 
-- ❌ Nessun upload dei file
+- ❌ Nessun file caricato online
 - ❌ Nessuna telemetria automatica
 - ❌ Nessun tracciamento dei documenti
 - ✅ Funzionamento offline
 - ✅ File temporanei gestiti e ripuliti
-- ✅ Log locali minimizzati — **mai il contenuto dei documenti**
+- ✅ Note tecniche (log) ridotte al minimo — **mai il contenuto dei documenti**
 
-È prevista una funzione **"Diagnostica anonima"**, disattivata di default,
+È prevista una funzione **"Diagnostica anonima"**, spenta finché non la attivi tu,
 volontaria, manuale e con anteprima di ciò che verrebbe condiviso. Dettagli in
 [PRIVACY.md](PRIVACY.md).
 
@@ -140,7 +140,7 @@ I test includono le **verifiche delle promesse di prodotto**
 ([`ProductPromisesTests`](tests/ApriP7M.Core.Tests/ProductPromisesTests.cs)):
 nessuna API di rete nella logica, estrazione P7M fedele byte per byte, PDF di
 cortesia con l'avviso sul valore fiscale, pulizia dei file temporanei,
-diagnostica disattivata di default. Chiunque può eseguirli e controllare.
+diagnostica disattivata di serie. Chiunque può eseguirli e controllare.
 
 ## Aggiornamenti
 
