@@ -12,6 +12,10 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>MSIX</WindowsPackageType>
+    <!-- Il runtime .NET viene incluso solo nelle build di distribuzione
+         (publish con RID win-x64 e SelfContained attivo negli script build/),
+         così i normali dotnet build di sviluppo restano leggeri e senza RID
+         forzato. Il Windows App SDK è invece sempre self-contained. -->
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SatelliteResourceLanguages>it-IT</SatelliteResourceLanguages>
     <Nullable>enable</Nullable>

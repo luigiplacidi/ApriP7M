@@ -3,6 +3,11 @@
 Le novità di ogni versione di Apri P7M. Le release complete, con installer e
 pacchetti, sono nella [pagina release](https://github.com/luigiplacidi/ApriP7M/releases).
 
+## 1.0.6 — 4 luglio 2026
+
+- Il pacchetto Microsoft Store ora include il runtime .NET: sui PC senza
+  .NET 10 l'app non chiede più di installare il Desktop Runtime al primo avvio
+
 ## 1.0.5 — 3 luglio 2026
 
 - La pagina PayPal per le donazioni si apre in italiano
