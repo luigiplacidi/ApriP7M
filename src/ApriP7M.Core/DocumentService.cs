@@ -29,6 +29,10 @@ public sealed class OpenedDocument
 /// </summary>
 public sealed class DocumentService
 {
+    // Difesa contro file firmati un numero assurdo di volte o costruiti ad arte:
+    // oltre questa profondità di srotolamento smettiamo e segnaliamo l'errore.
+    private const int MaxNesting = 12;
+
     /// <summary>Apre un file dal disco e restituisce i documenti risultanti.</summary>
     public IReadOnlyList<OpenedDocument> Open(string filePath)
     {
@@ -47,41 +51,50 @@ public sealed class DocumentService
 
     /// <summary>Apre un buffer (es. una entry di uno ZIP) e ne ricava i documenti.</summary>
     public IReadOnlyList<OpenedDocument> Open(byte[] bytes, string fileName, FileKind? known = null)
+        => Open(bytes, fileName, known, depth: 0);
+
+    private IReadOnlyList<OpenedDocument> Open(byte[] bytes, string fileName, FileKind? known, int depth)
     {
         var kind = known ?? FileTypeDetector.Detect(bytes, fileName);
 
         return kind switch
         {
-            FileKind.P7m => OpenFromP7m(bytes, fileName),
+            FileKind.P7m => OpenFromP7m(bytes, fileName, depth),
             FileKind.InvoiceXml => new[] { OpenFromInvoiceXml(bytes, fileName) },
             FileKind.Xml => new[] { PassThrough(bytes, fileName, FileKind.Xml, "xml") },
             FileKind.Pdf => new[] { PassThrough(bytes, fileName, FileKind.Pdf, "pdf") },
-            FileKind.Zip => OpenFromZip(bytes),
+            FileKind.Zip => OpenFromZip(bytes, depth),
             _ => throw new ApriP7MException(ErrorCode.UnsupportedFormat,
                 "Questo tipo di file non è supportato da Apri P7M.", "DocumentService")
         };
     }
 
-    private IReadOnlyList<OpenedDocument> OpenFromP7m(byte[] bytes, string fileName)
+    private IReadOnlyList<OpenedDocument> OpenFromP7m(byte[] bytes, string fileName, int depth)
     {
-        var extracted = CmsExtractor.Extract(bytes, fileName);
-
-        // Se dentro il P7M c'è una fattura, generiamo anche il PDF leggibile.
-        if (extracted.ContentKind == FileKind.InvoiceXml)
+        if (depth >= MaxNesting)
         {
-            return new[] { OpenFromInvoiceXml(extracted.Content, StripExt(fileName)) };
+            throw new ApriP7MException(ErrorCode.NotValidCms,
+                "Il file è firmato o annidato troppe volte: non è stato possibile arrivare al documento.",
+                "DocumentService");
         }
 
-        if (extracted.ContentKind == FileKind.Zip)
+        var extracted = CmsExtractor.Extract(bytes, fileName);
+        var innerName = StripExt(fileName);
+
+        // Contenuto a sua volta firmato (.p7m annidato / doppia firma) o un altro
+        // formato apribile: srotoliamo con la stessa logica, riconoscendo il tipo
+        // dai byte del contenuto estratto, non solo dal nome.
+        if (extracted.ContentKind is FileKind.P7m or FileKind.Zip or FileKind.InvoiceXml
+            || FileTypeDetector.Detect(extracted.Content, innerName) is FileKind.P7m)
         {
-            return OpenFromZip(extracted.Content);
+            return Open(extracted.Content, innerName, extracted.ContentKind, depth + 1);
         }
 
         return new[]
         {
             new OpenedDocument
             {
-                DisplayName = StripExt(fileName),
+                DisplayName = innerName,
                 Kind = extracted.ContentKind,
                 OriginalContent = extracted.Content,
                 OriginalExtension = extracted.SuggestedExtension
@@ -105,7 +118,7 @@ public sealed class DocumentService
         };
     }
 
-    private IReadOnlyList<OpenedDocument> OpenFromZip(byte[] zipBytes)
+    private IReadOnlyList<OpenedDocument> OpenFromZip(byte[] zipBytes, int depth)
     {
         using var ms = new MemoryStream(zipBytes);
         var entries = ZipExtractor.Extract(ms);
@@ -116,7 +129,7 @@ public sealed class DocumentService
             try
             {
                 // Ogni entry viene aperta ricorsivamente con la stessa logica.
-                docs.AddRange(Open(entry.Content, entry.EntryName, entry.Kind));
+                docs.AddRange(Open(entry.Content, entry.EntryName, entry.Kind, depth + 1));
             }
             catch (ApriP7MException ex) when (ex.Code is not ErrorCode.ZipPathTraversal and not ErrorCode.ZipCorrupted)
             {

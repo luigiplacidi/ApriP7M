@@ -3,6 +3,17 @@
 Le novità di ogni versione di Apri P7M. Le release complete, con installer e
 pacchetti, sono nella [pagina release](https://github.com/luigiplacidi/ApriP7M/releases).
 
+## 1.0.7 — 3 agosto 2026
+
+- L'anteprima PDF ora appare anche nella versione Microsoft Store: in alcuni
+  casi restava vuota pur avendo estratto il documento correttamente
+- I file firmati più volte (un `.p7m` dentro un altro `.p7m`) vengono aperti
+  fino al documento contenuto, invece di fermarsi al primo strato
+- Un file firmato viene riconosciuto anche dal contenuto, non solo dal nome:
+  così apre correttamente anche i `.p7m` rinominati
+- Quando l'anteprima non è disponibile l'app lo dice chiaramente e il
+  documento resta sempre salvabile sul PC
+
 ## 1.0.6 — 4 luglio 2026
 
 - Il pacchetto Microsoft Store ora include il runtime .NET: sui PC senza

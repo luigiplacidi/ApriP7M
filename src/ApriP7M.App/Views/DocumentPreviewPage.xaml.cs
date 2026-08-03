@@ -4,6 +4,7 @@ using ApriP7M.Core.Detection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.Web.WebView2.Core;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using WinRT.Interop;
@@ -12,6 +13,10 @@ namespace ApriP7M.App.Views;
 
 public sealed partial class DocumentPreviewPage : Page
 {
+    // Host virtuale usato per servire il PDF a WebView2: nella versione Store
+    // (pacchettizzata) i file:/// dalla cartella temporanea non vengono caricati.
+    private const string PreviewHost = "anteprima.aprip7m.local";
+
     private ResultItem? _item;
     private string? _previewPath;
 
@@ -59,7 +64,7 @@ public sealed partial class DocumentPreviewPage : Page
         };
     }
 
-    private void ShowPreview(ResultItem item)
+    private async void ShowPreview(ResultItem item)
     {
         var pdfBytes = item.Document.ReadablePdf;
         if (pdfBytes is null && item.Kind == FileKind.Pdf)
@@ -67,13 +72,8 @@ public sealed partial class DocumentPreviewPage : Page
             pdfBytes = item.Document.OriginalContent;
         }
 
-        if (pdfBytes is { Length: > 0 })
+        if (pdfBytes is { Length: > 0 } && await TryShowPdfAsync(pdfBytes))
         {
-            _previewPath = Path.Combine(Path.GetTempPath(), "ApriP7M", $"{Guid.NewGuid():N}.pdf");
-            Directory.CreateDirectory(Path.GetDirectoryName(_previewPath)!);
-            File.WriteAllBytes(_previewPath, pdfBytes);
-            PdfPreview.Source = new Uri(_previewPath);
-            PdfPreview.Visibility = Visibility.Visible;
             return;
         }
 
@@ -84,7 +84,67 @@ public sealed partial class DocumentPreviewPage : Page
             return;
         }
 
+        // Nessuna anteprima possibile (formato non visualizzabile o viewer non
+        // disponibile): il documento resta estratto e salvabile sul PC.
         NoPreview.Visibility = Visibility.Visible;
+    }
+
+    /// <summary>
+    /// Tenta l'anteprima PDF nel viewer integrato (WebView2). Se il runtime non
+    /// è disponibile o l'inizializzazione fallisce, ritorna false e lascia
+    /// mostrare il fallback "Anteprima non disponibile" (con salvataggio).
+    /// </summary>
+    private async Task<bool> TryShowPdfAsync(byte[] pdfBytes)
+    {
+        try
+        {
+            var folder = GetPreviewFolder();
+            var fileName = $"{Guid.NewGuid():N}.pdf";
+            _previewPath = Path.Combine(folder, fileName);
+            await File.WriteAllBytesAsync(_previewPath, pdfBytes);
+
+            // Inizializza esplicitamente il motore: senza, un runtime WebView2
+            // assente lascerebbe l'anteprima bianca senza spiegazione.
+            await PdfPreview.EnsureCoreWebView2Async();
+
+            // Serviamo la cartella tramite un host virtuale invece di un file:///.
+            // Nella versione Store (pacchettizzata) WebView2 non carica i file
+            // locali per percorso; con l'host virtuale funziona in entrambe.
+            PdfPreview.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                PreviewHost, folder, CoreWebView2HostResourceAccessKind.Allow);
+            PdfPreview.Source = new Uri($"https://{PreviewHost}/{fileName}");
+            PdfPreview.Visibility = Visibility.Visible;
+            return true;
+        }
+        catch
+        {
+            PdfPreview.Visibility = Visibility.Collapsed;
+            DeletePreviewFile();
+            _previewPath = null;
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Cartella scrivibile per l'anteprima, valida sia nella versione Store
+    /// (pacchettizzata) sia in quella con installer (non pacchettizzata).
+    /// </summary>
+    private static string GetPreviewFolder()
+    {
+        string folder;
+        try
+        {
+            // App pacchettizzata: cartella temporanea dedicata dell'app.
+            folder = ApplicationData.Current.TemporaryFolder.Path;
+        }
+        catch
+        {
+            // App non pacchettizzata: cartella temporanea di sistema.
+            folder = Path.Combine(Path.GetTempPath(), "ApriP7M");
+        }
+
+        Directory.CreateDirectory(folder);
+        return folder;
     }
 
     private async void SavePdf_Click(object sender, RoutedEventArgs e)
