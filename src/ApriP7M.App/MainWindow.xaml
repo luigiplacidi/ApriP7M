@@ -68,11 +68,30 @@
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE897;" />
                     </muxc:NavigationViewItem.Icon>
+                    <muxc:NavigationViewItem.InfoBadge>
+                        <muxc:InfoBadge x:Name="UpdateBadge" Visibility="Collapsed" />
+                    </muxc:NavigationViewItem.InfoBadge>
                 </muxc:NavigationViewItem>
             </muxc:NavigationView.FooterMenuItems>
 
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Frame x:Name="ContentFrame" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <muxc:InfoBar x:Name="UpdateBar"
+                              Grid.Row="0"
+                              Margin="16,16,16,0"
+                              IsOpen="False"
+                              IsClosable="True"
+                              Severity="Informational"
+                              Title="È disponibile una nuova versione di Apri P7M"
+                              CloseButtonClick="UpdateBar_CloseButtonClick">
+                    <muxc:InfoBar.ActionButton>
+                        <Button Content="Aggiorna" Click="Update_Click" />
+                    </muxc:InfoBar.ActionButton>
+                </muxc:InfoBar>
+                <Frame x:Name="ContentFrame" Grid.Row="1" />
             </Grid>
         </muxc:NavigationView>
     </Grid>

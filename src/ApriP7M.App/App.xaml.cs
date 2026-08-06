@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using ApriP7M.App.Services;
 using ApriP7M.Core.Settings;
 using Microsoft.UI;
@@ -20,6 +21,25 @@ public partial class App : Application
     {
         InitializeComponent();
         Settings = SettingsService.Load();
+
+        // Rete di sicurezza: i crash "unknown" dello Store non ci dicono nulla,
+        // quindi registriamo noi (in locale, minimizzato) e, dove possibile,
+        // evitiamo che un'eccezione sfuggita chiuda l'app.
+        UnhandledException += OnUnhandledException;
+        AppDomain.CurrentDomain.UnhandledException += (_, e) =>
+            CrashLogService.Record("AppDomain", e.ExceptionObject as Exception);
+        TaskScheduler.UnobservedTaskException += (_, e) =>
+        {
+            CrashLogService.Record("Task", e.Exception);
+            e.SetObserved();
+        };
+    }
+
+    private void OnUnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+    {
+        CrashLogService.Record("UI", e.Exception);
+        // Meglio un errore registrato e gestito che un crash silenzioso.
+        e.Handled = true;
     }
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)

@@ -3,6 +3,16 @@
 Le novità di ogni versione di Apri P7M. Le release complete, con installer e
 pacchetti, sono nella [pagina release](https://github.com/luigiplacidi/ApriP7M/releases).
 
+## 1.0.8 — 6 agosto 2026
+
+- Maggiore stabilità: un gestore globale degli errori evita le chiusure
+  impreviste e registra un log locale minimizzato (nessun contenuto dei
+  documenti) per diagnosticare i problemi che lo Store segnala come "unknown"
+- Messaggio chiaro quando un file è troppo grande da aprire, invece di
+  rischiare un esaurimento di memoria
+- All'avvio, se è disponibile un aggiornamento, l'app lo comunica con le
+  novità e un pulsante per aggiornare dal Microsoft Store
+
 ## 1.0.7 — 3 agosto 2026
 
 - L'anteprima PDF ora appare anche nella versione Microsoft Store: in alcuni

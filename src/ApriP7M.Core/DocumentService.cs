@@ -33,6 +33,10 @@ public sealed class DocumentService
     // oltre questa profondità di srotolamento smettiamo e segnaliamo l'errore.
     private const int MaxNesting = 12;
 
+    // Oltre questa dimensione non carichiamo il file in memoria: un file enorme
+    // (o passato per sbaglio) causerebbe un OutOfMemory e la chiusura dell'app.
+    private const long MaxFileBytes = 250L * 1024 * 1024; // 250 MB
+
     /// <summary>Apre un file dal disco e restituisce i documenti risultanti.</summary>
     public IReadOnlyList<OpenedDocument> Open(string filePath)
     {
@@ -41,6 +45,14 @@ public sealed class DocumentService
         {
             throw new ApriP7MException(ErrorCode.FileNotFound,
                 "Il file non esiste o non è più disponibile.", "DocumentService");
+        }
+
+        var size = new FileInfo(filePath).Length;
+        if (size > MaxFileBytes)
+        {
+            throw new ApriP7MException(ErrorCode.FileTooLarge,
+                "Il file è troppo grande da aprire (oltre 250 MB). Apri P7M è pensato per documenti, non per file di grandi dimensioni.",
+                "DocumentService");
         }
 
         var kind = FileTypeDetector.Detect(filePath);

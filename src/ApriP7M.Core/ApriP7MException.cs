@@ -12,6 +12,7 @@ public enum ErrorCode
     FileNotFound = 100,
     EmptyFile = 101,
     UnsupportedFormat = 102,
+    FileTooLarge = 103,
 
     // P7M / CMS
     NotValidCms = 200,
