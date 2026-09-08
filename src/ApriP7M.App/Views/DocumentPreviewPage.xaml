@@ -110,6 +110,33 @@
                                TextWrapping="Wrap"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                 </StackPanel>
+
+                <!-- Navigazione pagine per i PDF con più pagine -->
+                <StackPanel x:Name="PdfNav"
+                            Orientation="Horizontal"
+                            Spacing="6"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,0,18"
+                            Padding="6,4"
+                            Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                            CornerRadius="20"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            Visibility="Collapsed">
+                    <Button Width="40" Height="40" Padding="0"
+                            Click="PrevPage_Click"
+                            ToolTipService.ToolTip="Pagina precedente"
+                            AutomationProperties.Name="Pagina precedente">
+                        <FontIcon Glyph="&#xE70E;" FontSize="14" />
+                    </Button>
+                    <Button Width="40" Height="40" Padding="0"
+                            Click="NextPage_Click"
+                            ToolTipService.ToolTip="Pagina successiva"
+                            AutomationProperties.Name="Pagina successiva">
+                        <FontIcon Glyph="&#xE70D;" FontSize="14" />
+                    </Button>
+                </StackPanel>
             </Grid>
         </Border>
 

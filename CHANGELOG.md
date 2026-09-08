@@ -3,6 +3,11 @@
 Le novità di ogni versione di Apri P7M. Le release complete, con installer e
 pacchetti, sono nella [pagina release](https://github.com/luigiplacidi/ApriP7M/releases).
 
+## 1.0.9 — 6 agosto 2026
+
+- Nell'anteprima dei PDF con più pagine, due pulsanti per andare avanti e
+  indietro tra le pagine (suggerito da una recensione sullo Store)
+
 ## 1.0.8 — 6 agosto 2026
 
 - Maggiore stabilità: un gestore globale degli errori evita le chiusure

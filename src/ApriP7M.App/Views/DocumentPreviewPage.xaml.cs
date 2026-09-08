@@ -114,6 +114,7 @@ public sealed partial class DocumentPreviewPage : Page
                 PreviewHost, folder, CoreWebView2HostResourceAccessKind.Allow);
             PdfPreview.Source = new Uri($"https://{PreviewHost}/{fileName}");
             PdfPreview.Visibility = Visibility.Visible;
+            PdfNav.Visibility = Visibility.Visible;
             return true;
         }
         catch
@@ -145,6 +146,40 @@ public sealed partial class DocumentPreviewPage : Page
 
         Directory.CreateDirectory(folder);
         return folder;
+    }
+
+    private async void PrevPage_Click(object sender, RoutedEventArgs e)
+        => await SendPdfKeyAsync("PageUp", 33);
+
+    private async void NextPage_Click(object sender, RoutedEventArgs e)
+        => await SendPdfKeyAsync("PageDown", 34);
+
+    /// <summary>
+    /// Scorre il PDF di una pagina inviando il tasto Pag su / Pag giù al viewer
+    /// integrato tramite il protocollo DevTools: scorrimento nativo, senza
+    /// ricaricare il documento (comodo sui PDF con molte pagine).
+    /// </summary>
+    private async Task SendPdfKeyAsync(string key, int virtualKeyCode)
+    {
+        if (PdfPreview.CoreWebView2 is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var down =
+                $"{{\"type\":\"rawKeyDown\",\"windowsVirtualKeyCode\":{virtualKeyCode},\"key\":\"{key}\",\"code\":\"{key}\"}}";
+            var up =
+                $"{{\"type\":\"keyUp\",\"windowsVirtualKeyCode\":{virtualKeyCode},\"key\":\"{key}\",\"code\":\"{key}\"}}";
+            await PdfPreview.CoreWebView2.CallDevToolsProtocolMethodAsync("Input.dispatchKeyEvent", down);
+            await PdfPreview.CoreWebView2.CallDevToolsProtocolMethodAsync("Input.dispatchKeyEvent", up);
+        }
+        catch
+        {
+            // Lo scorrimento è un extra: se fallisce, l'utente usa comunque
+            // la barra del viewer PDF.
+        }
     }
 
     private async void SavePdf_Click(object sender, RoutedEventArgs e)
