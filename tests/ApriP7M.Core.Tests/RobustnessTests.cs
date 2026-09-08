@@ -125,4 +125,30 @@ public class RobustnessTests
         var cert = certGen.Generate(new Asn1SignatureFactory("SHA256WITHRSA", keyPair.Private));
         return (keyPair, cert);
     }
+
+    // Un file oltre la soglia non deve essere caricato in memoria (rischio
+    // OutOfMemory): l'app segnala FileTooLarge invece di crashare.
+    [Fact]
+    public void Open_FileTooLarge_ThrowsFileTooLarge()
+    {
+        var path = Path.Combine(Path.GetTempPath(), $"aprip7m-big-{Guid.NewGuid():N}.p7m");
+        try
+        {
+            // Estende il file a ~260 MB senza scrivere i byte (istantaneo).
+            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                fs.SetLength(260L * 1024 * 1024);
+            }
+
+            var ex = Assert.Throws<ApriP7MException>(() => new DocumentService().Open(path));
+            Assert.Equal(ErrorCode.FileTooLarge, ex.Code);
+        }
+        finally
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+    }
 }
