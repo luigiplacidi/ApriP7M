@@ -89,6 +89,14 @@ public sealed partial class HomeViewModel : ObservableObject
                 AddRecent(item);
             }
             HasResults = Results.Count > 0;
+
+            if (HasResults)
+            {
+                // Conta le aperture riuscite: serve a proporre il sostegno al
+                // momento giusto (dopo qualche uso), non a ogni apertura.
+                App.Settings.SuccessfulOpenCount++;
+                App.SaveSettings();
+            }
         }
         catch (ApriP7MException ex)
         {

@@ -41,6 +41,10 @@
                 <Button Content="Offri un caffè"
                         Style="{StaticResource AccentButtonStyle}"
                         Click="Donate_Click" />
+                <Button x:Name="SatispayButton"
+                        Content="Satispay"
+                        Visibility="Collapsed"
+                        Click="Satispay_Click" />
                 <Button Content="Recensione"
                         Click="Review_Click" />
             </StackPanel>

@@ -1,10 +1,12 @@
 using System.Text;
+using ApriP7M.App.Services;
 using ApriP7M.App.ViewModels;
 using ApriP7M.Core.Detection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Web.WebView2.Core;
+using Windows.System;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using WinRT.Interop;
@@ -39,6 +41,64 @@ public sealed partial class DocumentPreviewPage : Page
         ConfigureHeader(item);
         SavePdfButton.Visibility = CanSavePdf(item) ? Visibility.Visible : Visibility.Collapsed;
         ShowPreview(item);
+        MaybeShowSupportStrip();
+    }
+
+    /// <summary>
+    /// Mostra l'invito al sostegno solo ogni tanto (dopo qualche apertura),
+    /// mai se l'utente ha scelto di non vederlo più. Discreto e chiudibile.
+    /// </summary>
+    private void MaybeShowSupportStrip()
+    {
+        if (App.Settings.SupportPromptOptOut)
+        {
+            return;
+        }
+
+        var count = App.Settings.SuccessfulOpenCount;
+        // Prima volta alla 3ª apertura, poi ogni 10.
+        var show = count >= 3 && (count - 3) % 10 == 0;
+        if (!show)
+        {
+            return;
+        }
+
+        SupportSatispayButton.Visibility =
+            DonationLinks.HasSatispay ? Visibility.Visible : Visibility.Collapsed;
+        SupportStrip.Visibility = Visibility.Visible;
+    }
+
+    private async void SupportPayPal_Click(object sender, RoutedEventArgs e)
+        => await OpenLinkAsync(DonationLinks.PayPal);
+
+    private async void SupportSatispay_Click(object sender, RoutedEventArgs e)
+        => await OpenLinkAsync(DonationLinks.Satispay);
+
+    private void SupportClose_Click(object sender, RoutedEventArgs e)
+        => SupportStrip.Visibility = Visibility.Collapsed;
+
+    private void SupportOptOut_Click(object sender, RoutedEventArgs e)
+    {
+        App.Settings.SupportPromptOptOut = true;
+        App.SaveSettings();
+        SupportStrip.Visibility = Visibility.Collapsed;
+    }
+
+    private static async Task OpenLinkAsync(string url)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            return;
+        }
+
+        try
+        {
+            await Launcher.LaunchUriAsync(new Uri(url));
+        }
+        catch
+        {
+            // Un link che non si apre non deve far cadere l'app.
+        }
     }
 
     protected override void OnNavigatedFrom(NavigationEventArgs e)

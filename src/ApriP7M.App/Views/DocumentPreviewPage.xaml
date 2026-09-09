@@ -38,6 +38,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" ColumnSpacing="12">
@@ -140,7 +141,53 @@
             </Grid>
         </Border>
 
-        <Grid Grid.Row="2" ColumnSpacing="12" RowSpacing="10">
+        <!-- Invito discreto al sostegno, mostrato solo ogni tanto dopo che
+             l'utente ha aperto qualche documento. Sempre chiudibile. -->
+        <Border x:Name="SupportStrip"
+                Grid.Row="2"
+                Visibility="Collapsed"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="16,12">
+            <Grid ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <FontIcon Grid.Column="0" Glyph="&#xEB51;" FontSize="20"
+                          Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                          VerticalAlignment="Center" />
+                <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                    <TextBlock Text="Ti è stato utile?" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock Text="Apri P7M è gratis e senza pubblicità. Un caffè aiuta a tenerlo vivo."
+                               TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <HyperlinkButton Content="Non mostrare più"
+                                     Padding="0,2,0,0"
+                                     Click="SupportOptOut_Click" />
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <Button Content="Offri un caffè"
+                            Style="{StaticResource AccentButtonStyle}"
+                            Click="SupportPayPal_Click" />
+                    <Button x:Name="SupportSatispayButton"
+                            Content="Satispay"
+                            Visibility="Collapsed"
+                            Click="SupportSatispay_Click" />
+                    <Button Width="36" Height="36" Padding="0"
+                            Click="SupportClose_Click"
+                            ToolTipService.ToolTip="Chiudi"
+                            AutomationProperties.Name="Chiudi invito">
+                        <FontIcon Glyph="&#xE711;" FontSize="12" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="3" ColumnSpacing="12" RowSpacing="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition x:Name="FooterActionsColumn" Width="Auto" />

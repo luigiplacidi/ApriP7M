@@ -15,4 +15,10 @@ public sealed class AppSettings
 
     // Tema: "system" | "light" | "dark"
     public string Theme { get; set; } = "system";
+
+    // Sostegno al progetto: quante volte l'utente ha aperto un documento con
+    // successo (per proporre il caffè al momento giusto, non a ogni apertura)
+    // e se ha scelto di non vedere più l'invito.
+    public int SuccessfulOpenCount { get; set; }
+    public bool SupportPromptOptOut { get; set; }
 }
