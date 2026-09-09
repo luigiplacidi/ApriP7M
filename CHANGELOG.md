@@ -3,6 +3,14 @@
 Le novità di ogni versione di Apri P7M. Le release complete, con installer e
 pacchetti, sono nella [pagina release](https://github.com/luigiplacidi/ApriP7M/releases).
 
+## 1.0.10 — 9 settembre 2026
+
+- Ora è possibile sostenere il progetto anche con **Satispay**, oltre a PayPal,
+  sia dalla scheda "Sostieni il progetto" sia dalla pagina donazioni del sito
+- Dopo aver aperto qualche documento, l'app mostra un invito discreto e
+  richiudibile a offrire un caffè: non è invadente, appare di rado e si può
+  disattivare per sempre con un clic ("Non mostrare più")
+
 ## 1.0.9 — 6 agosto 2026
 
 - Nell'anteprima dei PDF con più pagine, due pulsanti per andare avanti e
