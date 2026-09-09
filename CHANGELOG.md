@@ -3,6 +3,14 @@
 Le novità di ogni versione di Apri P7M. Le release complete, con installer e
 pacchetti, sono nella [pagina release](https://github.com/luigiplacidi/ApriP7M/releases).
 
+## 1.0.11 — 9 settembre 2026
+
+- I pulsanti per sostenere il progetto ora sono coerenti: "PayPal" e "Satispay"
+  affiancati, con la frase "Offri un caffè" nel messaggio, sia nell'invito dopo
+  l'apertura sia nella scheda "Sostieni il progetto"
+- Le pagine privacy citano correttamente sia PayPal sia Satispay tra i servizi
+  che gestiscono le donazioni volontarie
+
 ## 1.0.10 — 9 settembre 2026
 
 - Ora è possibile sostenere il progetto anche con **Satispay**, oltre a PayPal,
